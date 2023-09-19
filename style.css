@@ -24,6 +24,7 @@
 
 .btn {
     transition: transform 0.3s linear, background-color 0.3s ease;
+    min-width: fit-content;
 }
 
 .btn:hover {
