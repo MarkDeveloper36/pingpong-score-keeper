@@ -1,49 +1,47 @@
-// selecting elements
-const displayScoreP1 = document.querySelector('#displayScoreP1');
-const btnPlayerP1 = document.querySelector('#btnPlayerP1');
-const displayScoreP2 = document.querySelector('#displayScoreP2');
-const btnPlayerP2 = document.querySelector('#btnPlayerP2');
-const btnReset = document.querySelector('#btnReset');
-const inputMatchLength = document.querySelector('#maxPoints')
-
-//score keeping
-let scoreP1 = 0;
-let scoreP2 = 0;
+//Player objects
+const player1 = {
+    score: 0,
+    scoreDisplay: document.querySelector('#displayScoreP1'),
+    button: document.querySelector('#btnPlayerP1')
+}
+const player2 = {
+    score: 0,
+    scoreDisplay: document.querySelector('#displayScoreP2'),
+    button: document.querySelector('#btnPlayerP2')
+}
+//event listeners for adding points
+player1.button.addEventListener('click', () => {
+    updateScore(player1, player2);
+});
+player2.button.addEventListener('click', () => {
+    updateScore(player2, player1);
+});
+//function for updating scores
+function updateScore(player, opponent) {
+    player.score++;
+    if (player.score == maxPoints) {
+        player.scoreDisplay.style.color = '#198754';
+        opponent.scoreDisplay.style.color = '#dc3545';
+        player.button.disabled = true;
+        opponent.button.disabled = true;
+    }
+    player.scoreDisplay.textContent = player.score;
+};
+//setting 'Playing To ...'
 let maxPoints = 6;
-
-
-// events
+const inputMatchLength = document.querySelector('#maxPoints');
 inputMatchLength.addEventListener('change', () => {
     maxPoints = parseInt(inputMatchLength.value);
 });
-
-btnPlayerP1.addEventListener('click', () => {
-    if (scoreP1 < (maxPoints - 1) && scoreP2 !== maxPoints) {
-        scoreP1++;
-    } else if (scoreP1 < maxPoints && scoreP2 !== maxPoints) {
-        scoreP1++;
-        displayScoreP1.style.color = '#198754';
-        displayScoreP2.style.color = '#dc3545';
-    }
-    displayScoreP1.textContent = scoreP1;
-});
-
-btnPlayerP2.addEventListener('click', () => {
-    if (scoreP2 < (maxPoints - 1) && scoreP1 !== maxPoints) {
-        scoreP2++;
-    } else if (scoreP2 < maxPoints && scoreP1 !== maxPoints) {
-        scoreP2++;
-        displayScoreP1.style.color = '#dc3545';
-        displayScoreP2.style.color = '#198754';
-    }
-    displayScoreP2.textContent = scoreP2;
-});
-
+// reset button
+const btnReset = document.querySelector('#btnReset');
 btnReset.addEventListener('click', () => {
-    scoreP1 = 0;
-    scoreP2 = 0;
-    displayScoreP1.textContent = scoreP1;
-    displayScoreP2.textContent = scoreP2;
-    displayScoreP1.style.color = '#212529';
-    displayScoreP2.style.color = '#212529';
+    player1.score = 0;
+    player2.score = 0;
+    player1.scoreDisplay.textContent = 0;
+    player2.scoreDisplay.textContent = 0;
+    player1.scoreDisplay.style.color = '#212529';
+    player2.scoreDisplay.style.color = '#212529';
+    player1.button.disabled = false;
+    player2.button.disabled = false;
 });
