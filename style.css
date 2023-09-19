@@ -23,13 +23,12 @@
 }
 
 .btn {
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition: transform 0.3s linear, background-color 0.3s ease;
 }
 
-
-
 .btn:hover {
-    transform: scale(1.05);
-    box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.5);
+    transform: scale(1.04) translate(2px, -3px);
+    box-shadow: -2px 5px 12px rgba(0, 0, 0, 0.8);
+
 }
 
