@@ -19,16 +19,18 @@ player2.button.addEventListener('click', () => {
 //function for updating scores
 function updateScore(player, opponent) {
     player.score++;
-    if (player.score == maxPoints) {
+    if (player.score > (maxPoints - 1) && Math.abs(player.score - opponent.score) > 1) {
         player.scoreDisplay.style.color = '#198754';
         opponent.scoreDisplay.style.color = '#dc3545';
         player.button.disabled = true;
         opponent.button.disabled = true;
+    } else if (player.score > (maxPoints- 1) && Math.abs(player.score - opponent.score) < 1) {
+        maxPoints++;
     }
     player.scoreDisplay.textContent = player.score;
 };
 //setting 'Playing To ...'
-let maxPoints = 6;
+let maxPoints = 11;
 const inputMatchLength = document.querySelector('#maxPoints');
 inputMatchLength.addEventListener('change', () => {
     maxPoints = parseInt(inputMatchLength.value);
