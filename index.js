@@ -2,12 +2,14 @@
 const player1 = {
     score: 0,
     scoreDisplay: document.querySelector('#displayScoreP1'),
-    button: document.querySelector('#btnPlayerP1')
+    button: document.querySelector('#btnPlayerP1'),
+    name: 'Player 1'
 }
 const player2 = {
     score: 0,
     scoreDisplay: document.querySelector('#displayScoreP2'),
-    button: document.querySelector('#btnPlayerP2')
+    button: document.querySelector('#btnPlayerP2'),
+    name: 'Player 2'
 }
 //event listeners for adding points
 player1.button.addEventListener('click', () => {
@@ -46,4 +48,21 @@ btnReset.addEventListener('click', () => {
     player2.scoreDisplay.style.color = '#212529';
     player1.button.disabled = false;
     player2.button.disabled = false;
+});
+//change name
+const nameInputplayer1 = document.querySelector('#player1Name');
+nameInputplayer1.addEventListener('change', () => {
+    player1.name = nameInputplayer1.value;
+    player1.button.textContent = `+ 1 ${player1.name}`;
+    if (nameInputplayer1.value == '') {
+        player1.button.textContent = `+ 1 Player 1`;
+    }
+});
+const nameInputplayer2 = document.querySelector('#player2Name');
+nameInputplayer2.addEventListener('change', () => {
+    player2.name = nameInputplayer2.value;
+    player2.button.textContent = `+ 1 ${player2.name}`;
+    if (nameInputplayer2.value == '') {
+        player2.button.textContent = `+ 1 Player 2`;
+    }
 });
